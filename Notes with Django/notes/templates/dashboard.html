@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="/notes/logout">Log Out </a>
+<h1>Dashboard {{ user }}</h1>
+
+<!-- <table>
+  <tr>
+    <td>
+      <form name="NoteForm" action="/notes/dashboard/" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="New Note" />
+      </form>
+    </td>
+  </tr>
+</table> -->
+
+<form name="notesUpdateForm" method="post" action="/notes/dashboard/">{% csrf_token %}
+  {{ formset.management_form}}
+  {% for form in formset %}
+    {{ form.id }}
+    <label>Title</label>
+    {{ form.title }}
+    <label>Text</label>
+    {{ form.text }}
+    <label>Time</label>
+    {{ form.createTime }}
+    <label>DELETE</label>
+    {{ form.DELETE }}
+  </br>
+  {% endfor %}
+  <input type="submit" value="Update">
+</form>
+
+{% endblock %}
